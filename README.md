@@ -7,4 +7,4 @@ The ModifiedScripts directory contains the modified train.py to use additional h
 
 Each other directory represents one experiment - speedup, halved training time or one of the detailed searches. In each Directory there are scrips to create the database, insert the configs, run the pretraining and evaluate the models. The results directory in each experiment directory contains the result files with the four used metrics used to evaluate the models. For number of training steps there is no directory as the model versions from the halved training times were used to evaluate this scaling parameter.
 
-To redo an experiment one has to run the DB creation, the Configs creation, the Run and Evaluation Script. The scripts have to be executed within Repository and thus paths have to be adapted to the local environment.
+To redo an experiment one has to run the DB creation, the Configs creation, the Run and Evaluation Script. The scripts have to be executed in the Chronos environment and thus paths have to be adapted to the local environment.
