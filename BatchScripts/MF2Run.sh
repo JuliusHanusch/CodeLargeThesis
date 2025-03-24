@@ -17,12 +17,12 @@ echo "Starting training script for task ID $SLURM_ARRAY_TASK_ID..."
 # Load environment
 module purge
 module load release/23.10 GCCcore/11.3.0 Python
-source /data/horse/ws/juha972b-Tlm/Tlm/bin/activate
+source /path/to/venv
 
 echo "Environment loaded successfully."
 
 # Move to project directory
-cd /data/horse/ws/juha972b-Tlm/Tlm
+cd path/to/script
 echo "Current directory: $(pwd)"
 
 # Define scaling method

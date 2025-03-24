@@ -13,7 +13,7 @@ def train_model(config_id, config_json):
     """Runs training for a single configuration and logs start/end time in DB."""
     
     DB_PATH = "Speedup.db"  # Updated to use Speedup.db
-    TRAIN_SCRIPT = "huggingface/scripts/training/train.py"
+    TRAIN_SCRIPT = "chronos-forecasting/scripts/training/train.py"
 
     # Connect to database with a busy timeout to avoid locking errors
     connection = sqlite3.connect(DB_PATH, timeout=30)  # 30 seconds timeout
@@ -73,7 +73,7 @@ def main():
     
     # Ensure a config_id is provided
     if len(sys.argv) != 2:
-        print("Usage: python speedupRuns.py <config_id>")
+        print("Usage: python speedupRunsAll.py <config_id>")
         sys.exit(1)
 
     # Get the config_id passed from the SLURM job array

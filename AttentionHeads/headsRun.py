@@ -26,7 +26,7 @@ def train_model(scaling_method, config_id, config_json):
     """Runs training for a single configuration based on scaling method and config_ig and logs start/end time in DB."""
     
     DB_PATH = "Heads.db"
-    TRAIN_SCRIPT = "huggingface/scripts/training/train.py"
+    TRAIN_SCRIPT = "chronos-forecasting/scripts/training/train.py"
 
     # Connect to database with retry
     connection = connect_with_retry(DB_PATH)
@@ -66,7 +66,7 @@ def train_model(scaling_method, config_id, config_json):
             connection.close()
             return
 
-        # Define model checkpoint paths
+        # Define model checkpoint paths: CHecks for available chekpoints each 10000 steps, skips if no such checkpoint available e.g. no generateed intermedaite results
         trained_model_paths = {
             step: f"./output/{scaling_method}/{config_id}/run-0/checkpoint-{step}" if step != 200000 else f"./output/{scaling_method}/{config_id}/run-0/checkpoint-final"
             for step in range(10000, 210000, 10000)
@@ -139,7 +139,7 @@ def main(scaling_method, task_id):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python scaledRun.py <scaling_method> <task_id>")
+        print("Usage: python headsRun.py <scaling_method> <task_id>")
         sys.exit(1)
 
     scaling_method = sys.argv[1]

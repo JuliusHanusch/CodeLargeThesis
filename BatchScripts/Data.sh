@@ -15,15 +15,13 @@
 
 module purge
 module load release/23.10 GCCcore/11.3.0 Python 
-source /data/horse/ws/juha972b-Tlm/Tlm/bin/activate
+source /path/to/venv
 
 echo "Start"
 
-cd ../..
-cd /data/horse/ws/juha972b-Tlm/Tlm
+cd path/to/script
 
-python3 huggingface/scripts/getTrainingData.py
-python3 speedupEvaluation.py
+python3 getTrainingData.py
 
 echo "Finish"
 exit

@@ -17,10 +17,11 @@ SCALING_PARAMS = {
     "steps_60000": range(1, 51),
 }
 
-BASE_PATH = "/data/horse/ws/juha972b-Tlm/Tlm/output"
+#leave output in base path
+BASE_PATH = "/path/to/your/dir/output"
 EVAL_CONFIGS = {
-    "in-domain": "huggingface/scripts/evaluation/configs/in-domain.yaml",
-    "zero-shot": "huggingface/scripts/evaluation/configs/zero-shot.yaml"
+    "in-domain": "chronos-forecasting/scripts/evaluation/configs/in-domain.yaml",
+    "zero-shot": "chronos-forecasting/scripts/evaluation/configs/zero-shot.yaml"
 }
 DB_PATH = "MF2.db"
 
@@ -157,7 +158,7 @@ def evaluate_model(scaling_param, task_id):
         
         results_path = f"{results_dir}/{eval_type}.csv"
         print(f"Evaluating {eval_type} model at {model_path}")
-        os.system(f"python3 huggingface/scripts/evaluation/evaluate_new.py {config_file} {results_path} --chronos-model-id {model_path} --batch-size=32 --device=cuda:0 --num-samples 20")
+        os.system(f"python3 chronos-forecasting/scripts/evaluation/evaluate_new.py {config_file} {results_path} --chronos-model-id {model_path} --batch-size=32 --device=cuda:0 --num-samples 20")
         
         mase, wql, rmse, mae = parse_results(results_path)
         if mase is not None and wql is not None and rmse is not None and mae is not None:
@@ -166,6 +167,6 @@ def evaluate_model(scaling_param, task_id):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python evaluate_models.py <scaling_parameter> <task_id>")
+        print("Usage: python mf2Evaluation.py <scaling_parameter> <task_id>")
         sys.exit(1)
     evaluate_model(sys.argv[1], int(sys.argv[2]))

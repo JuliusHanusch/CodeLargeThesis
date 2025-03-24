@@ -25,7 +25,7 @@ def train_model(scaling_method, config_id, config_json):
     """Runs training for a single configuration and logs start/end time in DB."""
     
     DB_PATH = "MF2.db"
-    TRAIN_SCRIPT = "huggingface/scripts/training/train.py"
+    TRAIN_SCRIPT = "chronos-forecasting/scripts/training/train.py"
 
     # Connect to database with retry
     connection = connect_with_retry(DB_PATH)
@@ -65,7 +65,7 @@ def train_model(scaling_method, config_id, config_json):
             connection.close()
             return
 
-        # Define model checkpoint paths
+        # Define model checkpoint paths: Checks for available chekpoints each 10000 steps, skips if no such checkpoint available e.g. no generateed intermedaite results
         trained_model_paths = {
             step: f"./output/{scaling_method}/{config_id}/run-0/checkpoint-{step}" if step != 200000 else f"./output/{scaling_method}/{config_id}/run-0/checkpoint-final"
             for step in range(10000, 210000, 10000)

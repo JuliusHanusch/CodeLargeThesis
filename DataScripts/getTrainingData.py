@@ -7,7 +7,7 @@ from tqdm import tqdm  # Import tqdm for progress bar
 
 print("Start Converting Data")
 
-# Step 1: Load the dataset from Hugging Face
+# Step 1: Load the dataset from Hugging Face -> Once for Augmented (training_corpus_tsmixup_10m) and once for Kernel Synth Data (training_corpus_kernel_synth_1m)
 ds = datasets.load_dataset("autogluon/chronos_datasets", "training_corpus_tsmixup_10m", streaming=True, split="train")
 
 
@@ -31,7 +31,7 @@ def convert_to_arrow(
     ArrowWriter(compression=compression).write_to_file(dataset, path=path)
 
 # Step 4: Convert the time-series data to Arrow format
-convert_to_arrow("/data/horse/ws/juha972b-Tlm/Tlm/huggingface/scripts/training_mix.arrow", time_series=time_series)
+convert_to_arrow("your/path/to/training_mix.arrow", time_series=time_series)
 
 print("Dataset successfully converted and stored in 'training_mix.arrow'")
 

@@ -11,11 +11,11 @@ SCALING_PARAMS = {
     "num_heads_8": range(151, 200)
 
 }
-
-BASE_PATH = "/data/horse/ws/juha972b-Tlm/Tlm/output"
+#leave output in path
+BASE_PATH = "/path/to/your/dir/output"
 EVAL_CONFIGS = {
-    "in-domain": "huggingface/scripts/evaluation/configs/in-domain.yaml",
-    "zero-shot": "huggingface/scripts/evaluation/configs/zero-shot.yaml"
+    "in-domain": "chronos-forecasting/scripts/evaluation/configs/in-domain.yaml",
+    "zero-shot": "chronos-forecasting/scripts/evaluation/configs/zero-shot.yaml"
 }
 DB_PATH = "Heads.db"
 
@@ -116,8 +116,8 @@ def evaluate_model(scaling_param, task_id):
     
     #create model paths
     config_id = config_ids[task_id]
-    training_step = 100000 if scaling_param == "max_steps" else 200000
-    model_path = f"{BASE_PATH}/default/{config_id}/run-0/checkpoint-100000" if scaling_param == "max_steps" else f"{BASE_PATH}/{scaling_param}/{config_id}/run-0/checkpoint-final"
+    training_step = 200000
+    model_path = f"{BASE_PATH}/{scaling_param}/{config_id}/run-0/checkpoint-final"
     results_dir = f"{model_path}/results"
     os.makedirs(results_dir, exist_ok=True)
     model_version_id = get_model_version_id(config_id, training_step)
@@ -130,7 +130,7 @@ def evaluate_model(scaling_param, task_id):
         
         results_path = f"{results_dir}/{eval_type}.csv"
         print(f"Evaluating {eval_type} model at {model_path}")
-        os.system(f"python3 huggingface/scripts/evaluation/evaluate_new.py {config_file} {results_path} --chronos-model-id {model_path} --batch-size=32 --device=cuda:0 --num-samples 20")
+        os.system(f"python3 chronos-forecasting/scripts/evaluation/evaluate_new.py {config_file} {results_path} --chronos-model-id {model_path} --batch-size=32 --device=cuda:0 --num-samples 20")
         mase, wql, rmse, mae = parse_results(results_path)
         if mase is not None and wql is not None and rmse is not None and mae is not None:
             insert_evaluation_result(model_version_id, eval_type, mase, wql, rmse, mae)
@@ -138,6 +138,6 @@ def evaluate_model(scaling_param, task_id):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python evaluate_models.py <scaling_parameter> <task_id>")
+        print("Usage: python headsEvaluation.py <scaling_parameter> <task_id>")
         sys.exit(1)
     evaluate_model(sys.argv[1], int(sys.argv[2]))

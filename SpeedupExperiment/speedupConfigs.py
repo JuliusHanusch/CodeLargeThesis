@@ -5,8 +5,8 @@ import os
 # Fixed parameters
 fixed_config = {
     "training_data_paths": [
-        "/data/horse/ws/juha972b-Tlm/Tlm/training_mix.arrow",
-        "/data/horse/ws/juha972b-Tlm/Tlm/huggingface/scripts/kernelsynth.arrow"
+        "your/path/to/training_mix.arrow",
+        "your/path/to/huggingface/scripts/kernelsynth.arrow"
     ],
     "probability": [0.9, 0.1],
     "context_length": 512,
