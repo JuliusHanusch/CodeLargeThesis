@@ -1,0 +1,5 @@
+Evaluation Type,Scaling Parameter,MASE,WQL,RMSE[mean],MAE
+in-domain,num_layers_2,0.9262 (5.64e-22),0.9642 (2.57e-29),0.4253 (2.08e-03),0.7255 (2.52e-09)
+in-domain,num_layers_4,0.9111 (4.22e-20),0.9333 (5.38e-23),0.3019 (3.31e-02),0.6440 (4.52e-07)
+zero-shot,num_layers_2,0.9132 (2.43e-20),0.9475 (2.09e-25),0.7363 (1.10e-09),0.7741 (4.30e-11)
+zero-shot,num_layers_4,0.9232 (1.45e-21),0.9261 (5.81e-22),0.7462 (5.00e-10),0.8159 (5.28e-13)
