@@ -1,4 +1,4 @@
-# Code for My Large Thesis
+# Code Large Thesis Enabling Multi-Fidelity search for chronos: A comparison of scaling methods.
 
 This repository contains the code used in my large thesis. Since I used the [Chronos Forecasting Repository](https://github.com/amazon-science/chronos-forecasting/tree/main) as a base, this repository includes only modified or additional code.
 
